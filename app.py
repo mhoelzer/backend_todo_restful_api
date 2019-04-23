@@ -5,12 +5,30 @@ app = Flask(__name__)
 api = Api(app)
 
 
-class Hello(Resource):
+class TodoList(Resource):
     def get(self):
         return {"hello": "no"}
 
 
-api.add_resource(Hello.get, "/")
+class TodoItem(Resource):
+    def get(self):
+        pass
+
+
+class TodoUpdate(Resource):
+    def put(self):
+        pass
+
+
+class TodoDelete(Resource):
+    def delete(self):
+        pass
+
+
+api.add_resource(TodoList, "/todolist")
+api.add_resource(TodoItem, "/todoitem/<int:id>")
+api.add_resource(TodoUpdate, "/todoitem/<int:id>/update")
+api.add_resource(TodoDelete, "/todoitem/<int:id>/delete")
 
 if __name__ == "__main__":
     app.run(debug=True)
