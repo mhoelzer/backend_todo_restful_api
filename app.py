@@ -64,12 +64,13 @@ class TodoItem(Resource):
 
     def put(self, todo_id):
         args = parser.parse_args()
-        title = {'title': args['title']}
-        todo_list[todo_id] = title
-        # return title, 201
-        # if args["title"]:
-        #     todo_list[todo_id].update({"title": args["title"]})
-        # return
+        if args["title"]:
+            todo_list[todo_id].update({"title": args["title"]})
+        if args["title"]:
+            todo_list[todo_id].update({"title": args["title"]})
+        if args["last_update"]:
+            todo_list[todo_id].update({"last_update": args["last_update"]})
+        return 201
 
     def delete(self, todo_id):
         del todo_list[todo_id]
