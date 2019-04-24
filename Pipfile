@@ -11,6 +11,8 @@ flask-restful = "*"
 pylint = "*"
 flake8 = "*"
 autopep8 = "*"
+flask-testing = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.7"
