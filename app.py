@@ -18,15 +18,19 @@ current_datetime = datetime.datetime.now()
 
 
 def nonexistant_todo(todo_id):
+    """if a todo doesn't exist, just abort but don't flip out too much"""
     if todo_id not in todo_list:
         abort(404, message=f"{todo_id} doesn't exist")
 
 
 class TodoList(Resource):
+    """this is the big list with all the todos b/c strength in numbers"""
     def get(self):
+        """show all the todos you have"""
         return todo_list
 
     def post(self):
+        """create a todo"""
         global todo_id
         todo_id = int(todo_id) + 1
         todo_id = str(todo_id)
@@ -43,11 +47,14 @@ class TodoList(Resource):
 
 
 class TodoItem(Resource):
+    """this is for individual todos"""
     def get(self, todo_id):
+        """get a specific todo based on id b/c they want to feel special"""
         nonexistant_todo(todo_id)
         return todo_list[todo_id]
 
     def put(self, todo_id):
+        """update a todo"""
         args = parser.parse_args()
         if args["title"]:
             todo_list[todo_id].update({"title": args["title"]})
@@ -63,6 +70,7 @@ class TodoItem(Resource):
         return 201
 
     def delete(self, todo_id):
+        """delete a todo b/c it isn't worth the effort anymore"""
         nonexistant_todo(todo_id)
         del todo_list[todo_id]
         return 204
